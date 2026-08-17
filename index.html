@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Minesweeper Aim Trainer</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- MENU SCREEN -->
+  <section id="menu-screen" class="screen active">
+    <div class="menu-card">
+      <h1>💣 Minesweeper Aim Trainer</h1>
+      <p class="subtitle">A real Intermediate board (16×16, 40 mines) — only the cells appear, never the board</p>
+
+      <div class="mode-select">
+        <button class="mode-btn active" data-mode="random">
+          <span class="mode-title">Random</span>
+          <span class="mode-desc">Targets picked anywhere on the board</span>
+        </button>
+        <button class="mode-btn" data-mode="solve">
+          <span class="mode-title">Solve Flow</span>
+          <span class="mode-desc">Clusters around revealed cells, like real play</span>
+        </button>
+      </div>
+
+      <div class="settings">
+        <div class="setting-row">
+          <label>Duration</label>
+          <div class="pill-group" data-setting="duration">
+            <button class="pill" data-value="30">30s</button>
+            <button class="pill active" data-value="60">60s</button>
+            <button class="pill" data-value="90">90s</button>
+          </div>
+        </div>
+
+        <div class="setting-row">
+          <label>Tile Size</label>
+          <div class="pill-group" data-setting="size">
+            <button class="pill" data-value="small">Small</button>
+            <button class="pill active" data-value="medium">Medium</button>
+            <button class="pill" data-value="large">Large</button>
+          </div>
+        </div>
+
+        <div class="setting-row">
+          <label>Squares at Once</label>
+          <div class="pill-group" data-setting="concurrent">
+            <button class="pill" data-value="1">1</button>
+            <button class="pill active" data-value="3">3</button>
+            <button class="pill" data-value="5">5</button>
+            <button class="pill" data-value="8">8</button>
+          </div>
+        </div>
+
+        <div class="setting-row" id="jump-chance-row">
+          <label>Jump Chance</label>
+          <div class="pill-group" data-setting="jumpChance">
+            <button class="pill" data-value="0.05">5%</button>
+            <button class="pill active" data-value="0.1">10%</button>
+            <button class="pill" data-value="0.2">20%</button>
+            <button class="pill" data-value="0.3">30%</button>
+          </div>
+        </div>
+
+        <div class="setting-row">
+          <label>Left / Right Mix</label>
+          <div class="static-pill">Real board odds: ~84% safe cells 🟦 left-click &nbsp;/&nbsp; ~16% mines 🟥 right-click</div>
+        </div>
+      </div>
+
+      <button id="start-btn" class="start-btn">Start</button>
+      <p class="hint">Blue = safe cell, left-click to reveal. Red = mine, right-click to flag. Wrong button = miss. No aiming reticle needed — just your cursor.</p>
+    </div>
+  </section>
+
+  <!-- GAME SCREEN -->
+  <section id="game-screen" class="screen">
+    <div id="hud">
+      <div class="hud-item"><span class="hud-label">Time</span><span id="hud-time">60.0</span></div>
+      <div class="hud-item"><span class="hud-label">Score</span><span id="hud-score">0</span></div>
+      <div class="hud-item"><span class="hud-label">Accuracy</span><span id="hud-acc">100%</span></div>
+      <div class="hud-item"><span class="hud-label">Streak</span><span id="hud-streak">0</span></div>
+      <button id="quit-btn">Quit ✕</button>
+    </div>
+    <div id="play-area"></div>
+    <div id="countdown-overlay"><span id="countdown-num">3</span></div>
+  </section>
+
+  <!-- RESULTS SCREEN -->
+  <section id="results-screen" class="screen">
+    <div class="menu-card results-card">
+      <h1>Run Complete</h1>
+      <div class="results-grid">
+        <div class="result-stat"><span class="stat-value" id="r-score">0</span><span class="stat-label">Score</span></div>
+        <div class="result-stat"><span class="stat-value" id="r-hits">0</span><span class="stat-label">Hits</span></div>
+        <div class="result-stat"><span class="stat-value" id="r-misses">0</span><span class="stat-label">Misses</span></div>
+        <div class="result-stat"><span class="stat-value" id="r-acc">0%</span><span class="stat-label">Accuracy</span></div>
+        <div class="result-stat"><span class="stat-value" id="r-avgtime">0ms</span><span class="stat-label">Avg Reaction</span></div>
+        <div class="result-stat"><span class="stat-value" id="r-tps">0</span><span class="stat-label">Targets / sec</span></div>
+        <div class="result-stat"><span class="stat-value" id="r-streak">0</span><span class="stat-label">Best Streak</span></div>
+        <div class="result-stat"><span class="stat-value" id="r-leftacc">0%</span><span class="stat-label">Left-click Acc</span></div>
+        <div class="result-stat"><span class="stat-value" id="r-rightacc">0%</span><span class="stat-label">Right-click Acc</span></div>
+      </div>
+      <div class="results-actions">
+        <button id="retry-btn" class="start-btn">Retry</button>
+        <button id="menu-btn" class="secondary-btn">Back to Menu</button>
+      </div>
+    </div>
+  </section>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
